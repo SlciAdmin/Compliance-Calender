@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CompliancePro — India Tax & Labour Calendar TY 2026-27</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Ambient particles -->
+  <div class="particles" id="particles"></div>
+
+  <!-- Progress bar -->
+  <div class="load-bar" id="loadBar"></div>
+
+  <!-- Sidebar Overlay -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="logo-icon">
+        <i class="fas fa-calendar-check"></i>
+      </div>
+      <div class="logo-text">
+        <span class="logo-main">CompliancePro</span>
+        <span class="logo-sub">TY 2026-27</span>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Navigation</div>
+      <a href="#" class="nav-item active" data-view="calendar">
+        <div class="nav-icon"><i class="fas fa-calendar-alt"></i></div>
+        <span>Calendar</span>
+        <div class="nav-indicator"></div>
+      </a>
+      <a href="#" class="nav-item" data-view="yearly">
+        <div class="nav-icon"><i class="fas fa-th-large"></i></div>
+        <span>Yearly View</span>
+        <div class="nav-indicator"></div>
+      </a>
+      <a href="#" class="nav-item" data-view="upcoming">
+        <div class="nav-icon"><i class="fas fa-clock"></i></div>
+        <span>Upcoming</span>
+        <div class="nav-indicator"></div>
+      </a>
+      <a href="#" class="nav-item" data-view="categories">
+        <div class="nav-icon"><i class="fas fa-tags"></i></div>
+        <span>Categories</span>
+        <div class="nav-indicator"></div>
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-source">
+        <i class="fas fa-link"></i>
+        <span>Data: eztax.in</span>
+      </div>
+      <div class="theme-row">
+        <span class="theme-label"><i class="fas fa-moon"></i> Dark Mode</span>
+        <div class="theme-toggle" id="themeToggle"></div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="main-wrapper">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-btn" id="menuBtn">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="breadcrumb" id="breadcrumbText">April 2026</div>
+      </div>
+      <div class="topbar-center">
+        <button class="nav-btn" id="prevMonth"><i class="fas fa-chevron-left"></i></button>
+        <div class="month-year-picker">
+          <select id="monthSelect" class="select-input">
+            <option value="1">January</option><option value="2">February</option>
+            <option value="3">March</option><option value="4" selected>April</option>
+            <option value="5">May</option><option value="6">June</option>
+            <option value="7">July</option><option value="8">August</option>
+            <option value="9">September</option><option value="10">October</option>
+            <option value="11">November</option><option value="12">December</option>
+          </select>
+          <select id="yearSelect" class="select-input">
+            <option value="2026" selected>2026</option>
+            <option value="2027">2027</option>
+          </select>
+        </div>
+        <button class="nav-btn" id="nextMonth"><i class="fas fa-chevron-right"></i></button>
+      </div>
+      <div class="topbar-right">
+        <div class="search-box">
+          <i class="fas fa-search"></i>
+          <input type="text" id="searchInput" placeholder="Search compliance...">
+        </div>
+        <select id="stateFilter" class="select-input">
+          <option value="All States">All States</option>
+          <option>Andhra Pradesh</option><option>Assam</option><option>Bihar</option>
+          <option>Chhattisgarh</option><option>Delhi</option><option>Goa</option>
+          <option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option>
+          <option>Jharkhand</option><option>Karnataka</option><option>Kerala</option>
+          <option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option>
+          <option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option>
+          <option>Odisha</option><option>Punjab</option><option>Rajasthan</option>
+          <option>Sikkim</option><option>Tamil Nadu</option><option>Telangana</option>
+          <option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option>
+          <option>West Bengal</option>
+        </select>
+        <button class="btn btn-ghost btn-icon" id="refreshBtn" title="Refresh">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+        <button class="btn btn-primary" id="addEventBtn">
+          <i class="fas fa-plus"></i>
+          <span>Add Event</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Stats Strip -->
+    <div class="stats-strip" id="statsStrip">
+      <div class="stat-chip">
+        <div class="stat-icon"><i class="fas fa-list-check"></i></div>
+        <div class="stat-content">
+          <span id="totalCount">0</span>
+          <label>Total Events</label>
+        </div>
+      </div>
+      <div class="stat-chip success">
+        <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+        <div class="stat-content">
+          <span id="compliedCount">0</span>
+          <label>Complied</label>
+        </div>
+      </div>
+      <div class="stat-chip danger">
+        <div class="stat-icon"><i class="fas fa-fire"></i></div>
+        <div class="stat-content">
+          <span id="highCount">0</span>
+          <label>High Priority</label>
+        </div>
+      </div>
+      <div class="stat-chip warning">
+        <div class="stat-icon"><i class="fas fa-hourglass-half"></i></div>
+        <div class="stat-content">
+          <span id="upcomingCount">0</span>
+          <label>Due in 7 Days</label>
+        </div>
+      </div>
+      <div class="stat-chip error">
+        <div class="stat-icon"><i class="fas fa-exclamation-triangle"></i></div>
+        <div class="stat-content">
+          <span id="overdueCount">0</span>
+          <label>Overdue</label>
+        </div>
+      </div>
+      <div class="status-indicator">
+        <span class="pulse-dot"></span>
+        <span id="statusText">Ready</span>
+      </div>
+    </div>
+
+    <!-- Views -->
+    <div class="content-area">
+      <!-- Calendar Panel -->
+      <div class="view-panel active" id="calendarPanel">
+        <div class="calendar-container">
+          <div class="calendar-header">
+            <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div>
+            <div>Thu</div><div>Fri</div><div>Sat</div>
+          </div>
+          <div class="calendar-grid" id="calendarGrid"></div>
+        </div>
+      </div>
+
+      <!-- Yearly Panel -->
+      <div class="view-panel" id="yearlyPanel">
+        <div class="yearly-container">
+          <div class="yearly-header">
+            <h2 id="yearlyTitle">2026 Compliance Overview</h2>
+            <button class="btn btn-primary" id="downloadYearBtn">
+              <i class="fas fa-print"></i> <span>Print Year</span>
+            </button>
+          </div>
+          <div class="yearly-grid" id="yearlyGrid"></div>
+        </div>
+      </div>
+
+      <!-- Upcoming Panel -->
+      <div class="view-panel" id="upcomingPanel">
+        <div class="upcoming-container">
+          <div class="upcoming-header">
+            <h2><i class="fas fa-clock"></i> Upcoming Deadlines</h2>
+            <div class="upcoming-filters">
+              <select id="upcomingFilter" class="select-input">
+                <option value="30">Next 30 Days</option>
+                <option value="60">Next 60 Days</option>
+                <option value="90">Next 90 Days</option>
+                <option value="180">Next 6 Months</option>
+                <option value="0">All Upcoming</option>
+              </select>
+              <select id="upcomingCatFilter" class="select-input">
+                <option value="">All Categories</option>
+                <option>Income Tax</option><option>GST</option><option>PF/ESI</option>
+                <option>Professional Tax</option><option>ROC/Company Law</option>
+                <option>Labour Laws</option><option>Export-Import</option>
+              </select>
+            </div>
+          </div>
+          <div class="upcoming-list" id="upcomingList"></div>
+        </div>
+      </div>
+
+      <!-- Categories Panel -->
+      <div class="view-panel" id="categoriesPanel">
+        <div class="categories-container">
+          <div class="categories-header">
+            <h2><i class="fas fa-tags"></i> Compliance by Category</h2>
+            <select id="catYearFilter" class="select-input">
+              <option value="2026">2026</option>
+              <option value="2027">2027</option>
+            </select>
+          </div>
+          <div class="categories-grid" id="categoriesGrid"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Day Detail Modal -->
+  <div class="modal-overlay" id="detailModal">
+    <div class="modal modal-lg">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <h3 id="modalDateTitle"><i class="fas fa-calendar-day"></i> Compliance Details</h3>
+          <p id="modalDateSub" class="modal-subtitle"></p>
+        </div>
+        <div class="modal-header-actions">
+          <button class="btn btn-gcal btn-sm" id="addAllGcal">
+            <i class="fab fa-google"></i> <span>Add All to Calendar</span>
+          </button>
+          <button class="close-btn" id="closeModal"><i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <!-- Add Event Modal -->
+  <div class="modal-overlay" id="addEventModal">
+    <div class="modal modal-md">
+      <div class="modal-header">
+        <h3><i class="fas fa-plus-circle"></i> Add Custom Compliance</h3>
+        <button class="close-btn" id="closeAddModal"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label>Title <span class="req">*</span></label>
+            <input type="text" id="customTitle" class="text-input" placeholder="e.g. GST Filing — July 2026">
+          </div>
+          <div class="form-group">
+            <label>Date <span class="req">*</span></label>
+            <input type="date" id="customDate" class="text-input">
+          </div>
+          <div class="form-group">
+            <label>Category</label>
+            <input type="text" id="customCategory" class="text-input" placeholder="e.g. GST, Income Tax">
+          </div>
+          <div class="form-group">
+            <label>Priority</label>
+            <select id="customPriority" class="select-input full-width">
+              <option value="HIGH PRIORITY">High Priority</option>
+              <option value="MEDIUM PRIORITY" selected>Medium Priority</option>
+              <option value="LOW PRIORITY">Low Priority</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Form Name</label>
+            <input type="text" id="customForm" class="text-input" placeholder="e.g. GSTR-3B">
+          </div>
+          <div class="form-group">
+            <label>Act / Law</label>
+            <input type="text" id="customAct" class="text-input" placeholder="e.g. GST Act 2017">
+          </div>
+          <div class="form-group full">
+            <label>Description</label>
+            <textarea id="customDesc" class="text-input" rows="3" placeholder="Details about this compliance..."></textarea>
+          </div>
+          <div class="form-group full">
+            <label>Penalty</label>
+            <input type="text" id="customPenalty" class="text-input" placeholder="e.g. ₹50/day late fee">
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelAddEvent">Cancel</button>
+        <button class="btn btn-gcal" id="saveAndAddGcal">
+          <i class="fab fa-google"></i> Save & Google Calendar
+        </button>
+        <button class="btn btn-primary" id="saveCustomEvent">
+          <i class="fas fa-save"></i> Save Event
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Google Calendar Modal -->
+  <div class="modal-overlay" id="gcalModal">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h3><i class="fab fa-google" style="color:#4285f4"></i> Add to Google Calendar</h3>
+        <button class="close-btn" id="closeGcalModal"><i class="fas fa-times"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="gcal-info">
+          <div class="gcal-event-preview" id="gcalEventPreview"></div>
+          <p class="gcal-note">
+            <i class="fas fa-info-circle"></i>
+            This will open Google Calendar with the event pre-filled. Sign in with your Google account to save it.
+          </p>
+          <div class="gcal-options">
+            <label class="checkbox-label">
+              <input type="checkbox" id="gcalReminder" checked>
+              <span class="checkbox-custom"></span>
+              Add reminder (1 day before)
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" id="gcalAllDay" checked>
+              <span class="checkbox-custom"></span>
+              All-day event
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-ghost" id="cancelGcal">Cancel</button>
+        <button class="btn btn-gcal" id="confirmAddGcal">
+          <i class="fab fa-google"></i> Open Google Calendar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
