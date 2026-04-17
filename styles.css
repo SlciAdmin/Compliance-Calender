@@ -846,9 +846,9 @@ textarea.text-input {
 .cal-day:hover::before { opacity: 0.7; }
 
 .cal-day:hover {
-  transform: scale(1.02) translateZ(4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-  z-index: 2;
+    transform: scale(1.02); /* Sirf scale rakho */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+    z-index: 2;
 }
 
 .cal-day:nth-child(7n) { border-right: none; }
@@ -1969,6 +1969,13 @@ RESPONSIVE — MOBILE (FIXED)
     .status-indicator { display: none; }
 
     /* Calendar cells — compact */
+    .calendar-container {
+        /* 3D effects hata do mobile par taaki glitch na aaye */
+        transform-style: flat !important;
+        perspective: none !important;
+        /* Shadow ko thoda kam karo taaki rendering smooth ho */
+        box-shadow: var(--shadow-md); 
+    }
     .cal-day { min-height: 80px; padding: 5px; }
     .event-chip { display: none; } /* Events chip hide, dots show */
     .event-count-dot { display: flex !important; }
