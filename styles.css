@@ -1611,6 +1611,40 @@ textarea.text-input {
   margin-top: 1px;
 }
 
+/* 1. Footer ko vertical (column) kar do taaki text upar aur buttons neeche aayein */
+    .event-card-footer {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 12px !important;
+        padding: 12px !important;
+    }
+
+    /* 2. Penalty text ko full width do */
+    .penalty-text {
+        flex: none !important;
+        width: 100% !important;
+        margin-bottom: 5px !important;
+        font-size: 0.75rem !important;
+    }
+
+    /* 3. Buttons wale container ko manage karo */
+    /* Note: Ye div JS se inline style ke saath aata hai, isliye !important use kar rahe hain */
+    .event-card-footer > div[style*="display:flex"] {
+        width: 100% !important;
+        justify-content: center !important; /* Buttons center mein */
+        gap: 8px !important;
+    }
+
+    /* 4. Buttons ko thoda chhota aur barabar size ka banao */
+    .gcal-btn-inline, 
+    .complied-btn {
+        flex: 1 !important; /* Dono buttons barabar jagah lein */
+        justify-content: center !important;
+        min-width: 0 !important;
+        font-size: 0.72rem !important;
+        padding: 8px 5px !important;
+    }
+
 .complied-btn {
   font-size: 0.8rem;
   display: flex;
