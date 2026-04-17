@@ -328,10 +328,7 @@ input, select, textarea { font-family: inherit; }
   z-index: 1;
 }
 
-.nav-item:hover {
-  color: var(--accent);
-}
-
+.nav-item:hover { color: var(--accent); }
 .nav-item:hover::before { opacity: 1; }
 
 .nav-item:hover .nav-icon {
@@ -1928,7 +1925,6 @@ textarea.text-input {
 @media (max-width: 480px) {
   .topbar { padding: 0 12px; gap: 8px; }
   .breadcrumb { font-size: 1rem; }
-  .topbar-right .select-input { display: none; }
 
   .cal-day { min-height: 60px; }
 

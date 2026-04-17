@@ -198,7 +198,6 @@ let complianceStatus = {};
 let customEvents = [];
 let gcalEventData = null;
 let searchTerm = '';
-let stateFilter = 'All States';
 
 // Load from storage safely
 try { complianceStatus = JSON.parse(localStorage.getItem('cp_status') || '{}'); } catch(e) { complianceStatus = {}; }
@@ -898,11 +897,6 @@ document.getElementById('refreshBtn').onclick = function() {
 // ═══════════════════════════════════════════════
 document.getElementById('searchInput').oninput = function() {
   searchTerm = this.value.toLowerCase().trim();
-  renderCalendar();
-};
-
-document.getElementById('stateFilter').onchange = function() {
-  stateFilter = this.value;
   renderCalendar();
 };
 
