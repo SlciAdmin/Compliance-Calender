@@ -65,10 +65,12 @@ input, select, textarea { font-family: inherit; }
   display: flex; align-items: center; gap: 12px;
 }
 .logo-mark {
-  width: 40px; height: 40px; border-radius: 10px;
-  background: var(--accent); display: flex; align-items: center; justify-content: center;
-  color: #fff; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.1rem;
-  letter-spacing: -1px; flex-shrink: 0;
+  width: 40px; 
+  height: 40px; 
+  border-radius: 10px;
+  object-fit: contain;
+  flex-shrink: 0;
+  background: transparent;
 }
 .logo-text-main { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--text); display: block; line-height: 1.1; }
 .logo-text-sub { font-size: .72rem; color: var(--text3); display: block; font-weight: 500; }
